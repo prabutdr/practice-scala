@@ -44,6 +44,7 @@ object StringDemo {
   s.drop(2).take(2).capitalize                    //> res14: String = Ll
   s.map(_.toUpper)                                //> res15: String = HELLO
   
+  
   // Regex
   val numPattern = "[0-9]+".r                     //> numPattern  : scala.util.matching.Regex = [0-9]+
 
