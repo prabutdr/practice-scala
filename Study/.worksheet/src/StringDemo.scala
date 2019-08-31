@@ -40,7 +40,8 @@ object StringDemo {;import org.scalaide.worksheet.runtime.library.WorksheetSuppo
   s.foreach(print);$skip(37); val res$13 = 
   for (c <- "hello") yield c.toUpper;System.out.println("""res13: String = """ + $show(res$13));$skip(31); val res$14 = 
   s.drop(2).take(2).capitalize;System.out.println("""res14: String = """ + $show(res$14));$skip(19); val res$15 = 
-  s.map(_.toUpper);System.out.println("""res15: String = """ + $show(res$15));$skip(44); 
+  s.map(_.toUpper);System.out.println("""res15: String = """ + $show(res$15));$skip(47); 
+  
   
   // Regex
   val numPattern = "[0-9]+".r;System.out.println("""numPattern  : scala.util.matching.Regex = """ + $show(numPattern ))}
