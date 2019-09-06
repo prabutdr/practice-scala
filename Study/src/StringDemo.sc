@@ -1,51 +1,78 @@
 object StringDemo {
-  val s = "Hello"                                 //> s  : String = Hello
+  val s = "Hello"
   //
   // Usual methods
-  s.length                                        //> res0: Int = 5
-  s + " Hi Again!"                                //> res1: String = Hello Hi Again!
-  s.getBytes                                      //> res2: Array[Byte] = Array(72, 101, 108, 108, 111)
+  s.length
+  s + " Hi Again!"
+  s.getBytes
+  // extracting specific char
+  s.charAt(0)
+  // same as above
+  s(0)
   
   // Testing String Equality
-  val s1 = "H" + "ello"                           //> s1  : String = Hello
-  s1 == s                                         //> res3: Boolean = true
-  null == s                                       //> res4: Boolean = false
-  s.equalsIgnoreCase("hello")                     //> res5: Boolean = true
+  val s1 = "H" + "ello"
+  s1 == s
+  null == s
+  s.equalsIgnoreCase("hello")
   
-  "eggs, milk, butter".split(",").map(_.trim)     //> res6: Array[String] = Array(eggs, milk, butter)
+  "eggs, milk, butter".split(",").map(_.trim)
   
   // String interpolation
-  val name = "Fred"                               //> name  : String = Fred
-  val age = 33                                    //> age  : Int = 33
-  s"$name is $age years old"                      //> res7: String = Fred is 33 years old
-  s"Age next year: ${age + 1}"                    //> res8: String = Age next year: 34
-  f"$name is $age%.2f years old"                  //> res9: String = Fred is 33.00 years old
-  raw"It's raw\n String"                          //> res10: String = It's raw\n String
+  val name = "Fred"
+  val age = 33
+  s"$name is $age years old"
+  s"Age next year: ${age + 1}"
+  f"$name is $age%.2f years old"
+  raw"It's raw\n String"
   // Older way
-  "%s is %d years old".format(name, age)          //> res11: String = Fred is 33 years old
+  "%s is %d years old".format(name, age)
   
   // Create Multiline Strings
   val ms1 = """This is
   a multiline
-  String"""                                       //> ms1  : String = This is
-                                                  //|   a multiline
-                                                  //|   String
+  String"""
   val ms2 = """This is
   |a "multiline"
   |String.
   |How's it?""".
-  stripMargin.replaceAll("\n", " ")               //> ms2  : String = This is a "multiline" String. How's it?
+  stripMargin.replaceAll("\n", " ")
   
   //
   // can be considered as sequence of chars
-  s.filter(_ != 'l')                              //> res12: String = Heo
-  s.foreach(print)                                //> Hello
-  for (c <- "hello") yield c.toUpper              //> res13: String = HELLO
-  s.drop(2).take(2).capitalize                    //> res14: String = Ll
-  s.map(_.toUpper)                                //> res15: String = HELLO
+  s.filter(_ != 'l')
+  s.foreach(print)
+  for (c <- "hello") yield c.toUpper
+  s.drop(2).take(2).capitalize
+  s.map(_.toUpper)
   
   
   // Regex
-  val numPattern = "[0-9]+".r                     //> numPattern  : scala.util.matching.Regex = [0-9]+
-
+  val numPattern = "[0-9]+".r
+  // same as above
+  new scala.util.matching.Regex("[0-9]+")
+  // finding matches
+  val address = "123 Main Street Suite 101"
+  val doorNo = numPattern.findFirstIn(address)
+  val matches = numPattern.findAllIn(address)
+  matches.toArray
+  
+  // Replacing patterns
+  address.replaceAll("[0-9]", "x")
+	numPattern.replaceAllIn(address, "Y")
+  address.replaceFirst("[0-9]", "x")
+  
+  // Extracting parts
+  val pattern = "([0-9]+) ([A-Za-z]+)".r
+  val pattern(count, fruit) = "10 Bananas"
+                                       
+                                                  
+  // Add your own methods to the String class
+  // via implicit conversions
+  implicit class StringImprovement(s: String) {
+    def increment: String = s.map(c => (c + 1).toChar)
+    def decrement: String = s.map(c => (c - 1).toChar)
+  }
+  "HAL".increment
+  "IBM".decrement
 }
