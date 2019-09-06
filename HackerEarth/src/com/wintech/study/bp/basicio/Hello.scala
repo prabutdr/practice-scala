@@ -1,4 +1,4 @@
-package com.wintech.study.basicio
+package com.wintech.study.bp.basicio
 
 object Hello extends App {
   println("Hello Kirti")

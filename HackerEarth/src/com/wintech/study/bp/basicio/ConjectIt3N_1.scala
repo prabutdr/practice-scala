@@ -1,6 +1,6 @@
 
 
-package com.wintech.study.basicio
+package com.wintech.study.bp.basicio
 
 import scala.io.StdIn
 

@@ -1,4 +1,4 @@
-package com.wintech.study.basicio
+package com.wintech.study.bp.basicio
 
 import java.util.Scanner
 
