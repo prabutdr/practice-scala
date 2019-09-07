@@ -1,8 +1,5 @@
 package com.pj2r.dsame.stack
 
-import scala.collection.immutable.Stack
-import scala.collection.immutable.List
-
 object P01_BalancingSymbol extends App {
   val symbolMap = Map(')' -> '(', ']' -> '[', '}' -> '{')
   val openSymbols = symbolMap.values.toSet
