@@ -52,6 +52,53 @@ class BinaryTreeNode(var data: Int, var left: BinaryTreeNode, var right: BinaryT
     result
   }
 
+  def inOrderTravelI(): ArrayBuffer[Int] = {
+    var result = ArrayBuffer[Int]()
+    val stack = Stack[BinaryTreeNode]()
+    var cNode = this
+    var done = false
+    while (done == false) {
+      if (cNode != null) {
+        stack.push(cNode)
+        cNode = cNode.left
+      } else {
+        if (stack.isEmpty)
+          done = true
+        else {
+          cNode = stack.pop()
+          result += cNode.data
+          cNode = cNode.right
+        }
+      }
+    }
+    result
+  }
+
+  def postOrderTravelI(): ArrayBuffer[Int] = {
+    var result = ArrayBuffer[Int]()
+    val stack = Stack[BinaryTreeNode]()
+    var cNode = this
+    var pNode: BinaryTreeNode = null
+    stack.push(this)
+    while (!stack.isEmpty) {
+      cNode = stack.top
+      if (pNode == null || pNode.left == cNode || pNode.right == cNode) {
+        if (cNode.left != null)
+          stack.push(cNode.left)
+        else if (cNode.right != null)
+          stack.push(cNode.right)
+      } else if (cNode.left == pNode) {
+        if (cNode.right != null)
+          stack.push(cNode.right)
+      } else {
+        result += cNode.data
+        stack.pop()
+      }
+      pNode = cNode
+    }
+    result
+  }
+
 }
 
 object BinaryTreeNode {
@@ -74,6 +121,8 @@ object Test extends App {
   val bt = BinaryTreeNode(1, 2, 4, 5, 3, 6, 7)
   println("Pre order R: " + bt.preOrderTravelR())
   println("Pre order I: " + bt.preOrderTravelI())
-  println("In order: " + bt.inOrderTravelR())
-  println("Post order: " + bt.postOrderTravelR())
+  println("In order R: " + bt.inOrderTravelR())
+  println("In order I: " + bt.inOrderTravelI())
+  println("Post order R: " + bt.postOrderTravelR())
+  println("Post order I: " + bt.postOrderTravelI())
 }
