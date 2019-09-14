@@ -1,13 +1,11 @@
-package com.pj2r.dsame.stack
+package com.pj2r.dsame.queue
 
 import scala.collection.mutable.Stack
-import org.scalatest.FunSuite
-import org.scalatest.BeforeAndAfter
+
 import org.junit.runner.RunWith
+import org.scalatest.BeforeAndAfter
+import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
-import scala.collection.mutable.Queue
-import com.pj2r.dsame.queue.P01_ReverseQ
-import com.pj2r.dsame.queue.P09_StackPairwiseOrder
 
 @RunWith(classOf[JUnitRunner])
 class P09_StackPairwiseOrderTest extends FunSuite with BeforeAndAfter {
