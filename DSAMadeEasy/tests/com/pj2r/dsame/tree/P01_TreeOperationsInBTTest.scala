@@ -89,4 +89,18 @@ class P01_TreeOperationsInBTTest extends FunSuite with BeforeAndAfter {
     }
   })
 
+  // For finding depth using post order traversal
+  val inForSearch_5 = List(
+    (BinaryTreeNode(1, 2, 4, 5, 3, 6, 7), 3),
+    (BinaryTreeNode(1, 2, 4, 5, 3), 3),
+    (BinaryTreeNode(1, 2), 2),
+    (BinaryTreeNode(0), 1))
+  inForSearch_4.foreach({
+    case (tree, size) => {
+      test(s"Depth of tree ${tree.levelOrderTravelI()} is $size (using post order traversal)") {
+        assertResult(size)(P01_TreeOperationsInBT.depthOf_PostOrder(tree))
+      }
+    }
+  })
+
 }

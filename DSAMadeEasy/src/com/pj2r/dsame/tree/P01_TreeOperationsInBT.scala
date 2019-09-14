@@ -94,6 +94,30 @@ object P01_TreeOperationsInBT extends App {
     depth
   }
 
+  def depthOf_PostOrder(root: BinaryTreeNode): Int = {
+    val stack = Stack[BinaryTreeNode]()
+    var depth = 0
+    stack.push(root)
+    var cNode: BinaryTreeNode = null
+    var pNode: BinaryTreeNode = null
+    while (!stack.isEmpty) {
+      cNode = stack.top
+
+      if (pNode == null || pNode.left == cNode || pNode.right == cNode) {
+        if (cNode.left != null) stack.push(cNode.left)
+        else if (cNode.right != null) stack.push(cNode.right)
+      } else if (cNode.left == pNode) {
+        if (cNode.right != null) stack.push(cNode.right)
+      } else {
+        stack.pop()
+      }
+
+      pNode = cNode
+      depth = depth max stack.size
+    }
+    depth
+  }
+
   def levelOrderReverse(root: BinaryTreeNode): Buffer[Int] = {
     val result = ArrayBuffer[Int]()
     val stack = Stack[Int]()
