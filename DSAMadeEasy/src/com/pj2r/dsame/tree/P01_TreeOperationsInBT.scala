@@ -1,6 +1,9 @@
 package com.pj2r.dsame.tree
 
 import scala.collection.mutable.Queue
+import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.Stack
+import scala.collection.mutable.Buffer
 
 object P01_TreeOperationsInBT extends App {
   // Recursive version
@@ -48,6 +51,20 @@ object P01_TreeOperationsInBT extends App {
     sizeOf(root.left) + 1 + sizeOf(root.right)
   }
 
+  def levelOrderReverse(root: BinaryTreeNode): Buffer[Int] = {
+    val result = ArrayBuffer[Int]()
+    val stack = Stack[Int]()
+    val q = Queue[BinaryTreeNode]()
+    q.enqueue(root)
+    while (!q.isEmpty) {
+      val node = q.dequeue()
+      stack.push(node.data)
+      if (node.right != null) q.enqueue(node.right)
+      if (node.left != null) q.enqueue(node.left)
+    }
+    stack.toBuffer
+  }
+
   // TEST
   // Inserting to binary tree
   val bt = BinaryTreeNode(1, 2, 4, 5, 3, 6, 7)
@@ -57,4 +74,5 @@ object P01_TreeOperationsInBT extends App {
   insertInBT(bt, 13)
   insertInBT(bt, 14)
   println("Binary tree - " + bt.levelOrderTravelI())
+  println("Level order reverse - " + levelOrderReverse(bt))
 }
