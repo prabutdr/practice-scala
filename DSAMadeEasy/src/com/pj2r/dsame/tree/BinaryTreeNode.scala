@@ -6,6 +6,12 @@ import scala.collection.mutable.Queue
 
 class BinaryTreeNode(var data: Int, var left: BinaryTreeNode, var right: BinaryTreeNode) {
 
+  override def toString: String = {
+    return "[" + (if (left != null) left.toString() + "<-" else "") +
+      data.toString +
+      (if (right != null) "->" + right.toString() else "") + "]"
+  }
+
   // R - Recursive versions
   def preOrderTravelR(): ArrayBuffer[Int] = {
     var result = ArrayBuffer[Int]()
@@ -59,6 +65,7 @@ class BinaryTreeNode(var data: Int, var left: BinaryTreeNode, var right: BinaryT
     while (done == false) {
       if (cNode != null) {
         stack.push(cNode)
+        println(stack)
         cNode = cNode.left
       } else {
         if (stack.isEmpty)

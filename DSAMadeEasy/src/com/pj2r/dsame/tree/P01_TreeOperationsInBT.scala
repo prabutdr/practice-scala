@@ -51,6 +51,49 @@ object P01_TreeOperationsInBT extends App {
     sizeOf(root.left) + 1 + sizeOf(root.right)
   }
 
+  def depthOf(root: BinaryTreeNode): Int = {
+    if (root == null) return 0
+    return (1 + depthOf(root.left)) max (1 + depthOf(root.right))
+  }
+
+  // *** In order will not work for identify depth, should go for post order / level order
+  //  def depthOf_InOrder(root: BinaryTreeNode): Int = {
+  //    var depth = 0
+  //    var cNode = root
+  //    val stack = Stack[BinaryTreeNode]()
+  //    //    stack.push(root)
+  //    while (cNode != null || !stack.isEmpty) {
+  //      if (cNode == null) {
+  //        cNode = stack.pop()
+  //        cNode = cNode.right
+  //      } else {
+  //        stack.push(cNode)
+  //        cNode = cNode.left
+  //        println(stack)
+  //        depth = depth max stack.size
+  //      }
+  //    }
+  //    depth
+  //  }
+
+  def depthOf_LevelOrder(root: BinaryTreeNode): Int = {
+    val q = Queue[BinaryTreeNode]()
+    var depth = 0
+    q.enqueue(root)
+    q.enqueue(null)
+    while (!q.isEmpty) {
+      val node = q.dequeue()
+      if (node == null) {
+        depth += 1
+        if (!q.isEmpty) q.enqueue(null)
+      } else {
+        if (node.left != null) q.enqueue(node.left)
+        if (node.right != null) q.enqueue(node.right)
+      }
+    }
+    depth
+  }
+
   def levelOrderReverse(root: BinaryTreeNode): Buffer[Int] = {
     val result = ArrayBuffer[Int]()
     val stack = Stack[Int]()
@@ -75,4 +118,5 @@ object P01_TreeOperationsInBT extends App {
   insertInBT(bt, 14)
   println("Binary tree - " + bt.levelOrderTravelI())
   println("Level order reverse - " + levelOrderReverse(bt))
+  println(BinaryTreeNode(1, 2, 4, 5, 3))
 }
