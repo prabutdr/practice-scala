@@ -2,6 +2,7 @@ package com.pj2r.dsame.tree
 
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.Stack
+import scala.collection.mutable.Queue
 
 class BinaryTreeNode(var data: Int, var left: BinaryTreeNode, var right: BinaryTreeNode) {
 
@@ -44,10 +45,8 @@ class BinaryTreeNode(var data: Int, var left: BinaryTreeNode, var right: BinaryT
     while (!stack.isEmpty) {
       val node = stack.pop()
       result += node.data
-      if (node.right != null)
-        stack.push(node.right)
-      if (node.left != null)
-        stack.push(node.left)
+      if (node.right != null) stack.push(node.right)
+      if (node.left != null) stack.push(node.left)
     }
     result
   }
@@ -99,6 +98,37 @@ class BinaryTreeNode(var data: Int, var left: BinaryTreeNode, var right: BinaryT
     result
   }
 
+  def postOrderTravelI_With2Stack(): ArrayBuffer[Int] = {
+    val s1 = Stack[BinaryTreeNode]()
+    val s2 = Stack[BinaryTreeNode]()
+    s1.push(this)
+    while (!s1.isEmpty) {
+      val node = s1.pop()
+      s2.push(node)
+      if (node.left != null)
+        s1.push(node.left)
+      if (node.right != null)
+        s1.push(node.right)
+    }
+    val result = ArrayBuffer[Int]()
+    while (!s2.isEmpty) {
+      result += s2.pop().data
+    }
+    result
+  }
+
+  def levelOrderTravelI(): ArrayBuffer[Int] = {
+    val q = Queue[BinaryTreeNode]()
+    q.enqueue(this)
+    val result = ArrayBuffer[Int]()
+    while (!q.isEmpty) {
+      val node = q.dequeue()
+      result += node.data
+      if (node.left != null) q.enqueue(node.left)
+      if (node.right != null) q.enqueue(node.right)
+    }
+    result
+  }
 }
 
 object BinaryTreeNode {
@@ -125,4 +155,6 @@ object Test extends App {
   println("In order I: " + bt.inOrderTravelI())
   println("Post order R: " + bt.postOrderTravelR())
   println("Post order I: " + bt.postOrderTravelI())
+  println("Post order I (with two stack): " + bt.postOrderTravelI_With2Stack())
+  println("Level order I: " + bt.levelOrderTravelI())
 }
