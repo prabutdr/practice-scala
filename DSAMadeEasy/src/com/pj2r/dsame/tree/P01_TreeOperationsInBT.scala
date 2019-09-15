@@ -142,6 +142,43 @@ object P01_TreeOperationsInBT extends App {
     return 1 + (findMinDepth_R(root.left) min findMinDepth_R(root.right))
   }
 
+  def deleteFromBT(root: BinaryTreeNode, data: Int): Boolean = {
+    val q = Queue[BinaryTreeNode]()
+    q.enqueue(root)
+    var foundNode: BinaryTreeNode = null
+    var cNode: BinaryTreeNode = null
+    while (!q.isEmpty) {
+      cNode = q.dequeue()
+      if (cNode.data == data) {
+        foundNode = cNode
+      }
+      if (cNode.left != null) q.enqueue(cNode.left)
+      if (cNode.right != null) q.enqueue(cNode.right)
+    }
+    if (foundNode == null)
+      return false
+    // cNode is a deepest node
+    foundNode.data = cNode.data
+    deleteDeepest(root, cNode)
+    return true
+  }
+
+  def deleteDeepest(root: BinaryTreeNode, deepNode: BinaryTreeNode): Unit = {
+    val q = Queue[BinaryTreeNode]()
+    q.enqueue(root)
+    while (!q.isEmpty) {
+      val cNode = q.dequeue()
+      if (cNode.left == deepNode) {
+        cNode.left = null
+        return
+      } else if (cNode.left != null) q.enqueue(cNode.left)
+      if (cNode.right == deepNode) {
+        cNode.right = null
+        return
+      } else if (cNode.right != null) q.enqueue(cNode.right)
+    }
+  }
+
   // TEST
   // Inserting to binary tree
   val bt = BinaryTreeNode(1, 2, 4, 5, 3, 6, 7)

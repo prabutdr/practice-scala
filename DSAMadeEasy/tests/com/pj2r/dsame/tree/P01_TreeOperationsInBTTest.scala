@@ -112,4 +112,21 @@ class P01_TreeOperationsInBTTest extends FunSuite with BeforeAndAfter {
       }
     }
   })
+
+  // For removing an item
+  val inForSearch_6 = List(
+    (BinaryTreeNode(1, 2, 4, 5, 3, 6, 7), 4),
+    (BinaryTreeNode(1, 2, 4, 5, 3), 3),
+    (BinaryTreeNode(1, 2), 1))
+  inForSearch_6.foreach({
+    case (tree, data) => {
+      test(s"Delete $data from tree ${tree.levelOrderTravelI()}}") {
+        assertResult(true) {
+          val result = P01_TreeOperationsInBT.deleteFromBT(tree, data)
+          println(tree.levelOrderTravelI())
+          result
+        }
+      }
+    }
+  })
 }
