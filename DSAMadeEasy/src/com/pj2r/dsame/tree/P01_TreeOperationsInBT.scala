@@ -163,7 +163,7 @@ object P01_TreeOperationsInBT extends App {
     return true
   }
 
-  def deleteDeepest(root: BinaryTreeNode, deepNode: BinaryTreeNode): Unit = {
+  private def deleteDeepest(root: BinaryTreeNode, deepNode: BinaryTreeNode): Unit = {
     val q = Queue[BinaryTreeNode]()
     q.enqueue(root)
     while (!q.isEmpty) {
@@ -177,6 +177,14 @@ object P01_TreeOperationsInBT extends App {
         return
       } else if (cNode.right != null) q.enqueue(cNode.right)
     }
+  }
+
+  def isStructureEqual(root1: BinaryTreeNode, root2: BinaryTreeNode): Boolean = {
+    if (root1 == null && root2 == null)
+      return true
+    if (root1 == null || root2 == null)
+      return false
+    return isStructureEqual(root1.left, root2.left) && isStructureEqual(root1.right, root2.right)
   }
 
   // TEST

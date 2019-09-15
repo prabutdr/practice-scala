@@ -129,4 +129,36 @@ class P01_TreeOperationsInBTTest extends FunSuite with BeforeAndAfter {
       }
     }
   })
+
+  // For finding structure of two trees are equal (positive)
+  val inForSearch_7 = List(
+    (BinaryTreeNode(1, 2, 4, 5, 3, 6, 7), BinaryTreeNode(1, 2, 4, 5, 3, 6, 7)),
+    (BinaryTreeNode(1, 2, 4, 5, 3), BinaryTreeNode(-1, -2, 0, 5, 7)),
+    (BinaryTreeNode(1), BinaryTreeNode(-100)),
+    (BinaryTreeNode(1, 2), BinaryTreeNode(100, 200)))
+  inForSearch_7.foreach({
+    case (tree1, tree2) => {
+      test(s"Tree ${tree1.levelOrderTravelI()} and ${tree2.levelOrderTravelI()} are structurly equal") {
+        assertResult(true) {
+          P01_TreeOperationsInBT.isStructureEqual(tree1, tree2)
+        }
+      }
+    }
+  })
+
+  // For finding structure of two trees are equal (negative)
+  val inForSearch_8 = List(
+    (BinaryTreeNode(1, 2, 4, 5, 3, 6, 7), BinaryTreeNode(1)),
+    (BinaryTreeNode(1, 2, 4, 5, 3), BinaryTreeNode(-1, -2, 0, 5, 7, 9)),
+    (BinaryTreeNode(1), BinaryTreeNode(-100, 2, 3, 4)),
+    (BinaryTreeNode(1, 2), BinaryTreeNode(100)))
+  inForSearch_8.foreach({
+    case (tree1, tree2) => {
+      test(s"Tree ${tree1.levelOrderTravelI()} and ${tree2.levelOrderTravelI()} are structurly not equal") {
+        assertResult(false) {
+          P01_TreeOperationsInBT.isStructureEqual(tree1, tree2)
+        }
+      }
+    }
+  })
 }
