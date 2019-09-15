@@ -132,6 +132,16 @@ object P01_TreeOperationsInBT extends App {
     stack.toBuffer
   }
 
+  def findMinDepth_R(root: BinaryTreeNode): Int = {
+    if (root == null)
+      return 0
+    if (root.left == null && root.right == null)
+      return 1
+    if (root.right == null) return 1 + findMinDepth_R(root.left)
+    if (root.left == null) return 1 + findMinDepth_R(root.right)
+    return 1 + (findMinDepth_R(root.left) min findMinDepth_R(root.right))
+  }
+
   // TEST
   // Inserting to binary tree
   val bt = BinaryTreeNode(1, 2, 4, 5, 3, 6, 7)
