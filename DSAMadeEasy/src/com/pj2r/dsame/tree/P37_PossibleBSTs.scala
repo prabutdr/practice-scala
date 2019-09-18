@@ -11,16 +11,16 @@ object P37_PossibleBSTs extends App {
       subtrees = null :: subtrees
       return subtrees
     }
-    for (i <- start to end) {
-      for (left <- generateTrees(start, i - 1)) {
-        for (right <- generateTrees(i + 1, end)) {
-          subtrees = new BinaryTreeNode(i, left, right) :: subtrees
-        }
-      }
+    for (
+      i <- start to end;
+      left <- generateTrees(start, i - 1);
+      right <- generateTrees(i + 1, end)
+    ) {
+      subtrees = new BinaryTreeNode(i, left, right) :: subtrees
     }
     subtrees
   }
 
   // TEST
-  println(generateTrees(4))
+  println(generateTrees(3))
 }
