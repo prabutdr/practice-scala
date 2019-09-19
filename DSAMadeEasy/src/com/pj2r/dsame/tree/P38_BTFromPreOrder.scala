@@ -9,6 +9,7 @@ object P38_BTFromPreOrder extends App {
     val node = new BinaryTreeNode(preOrder(i), null, null)
     if (preOrder(i) == 'L')
       return node
+
     i += 1
     node.left = buildTree(preOrder)
     i += 1
