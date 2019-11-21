@@ -25,4 +25,13 @@ object PXX_KLargest extends App {
       if (a(min) > a(i)) min = i
     min
   }
+
+  // Using max heap
+  def findKLargest2(a: Array[Int], k: Int): Array[Int] = {
+    val res = Array.ofDim[Int](k)
+
+    val mh = MaxHeap(a)
+    for (i <- 0 until k) res(i) = mh.deleteMax()
+    res
+  }
 }

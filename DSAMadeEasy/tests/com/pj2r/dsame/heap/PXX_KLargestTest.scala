@@ -16,10 +16,21 @@ class PXX_KLargestTest extends FunSuite with BeforeAndAfter {
     (Array(2, 4, 9, 0, -1, 89), 5, Array(0, 2, 4, 9, 89)),
     (Array(2, 4, 9, 0, -1, 89), 6, Array(-1, 0, 2, 4, 9, 89)),
     (Array(0), 1, Array(0)))
+
+  // Using temp array
   inputs.foreach({
     case (array, k, output) => {
       test(s"Largest $k elements from ${array.mkString(", ")} is = ${output.mkString(", ")}") {
         assertResult(output.sorted)(PXX_KLargest.findKLargest1(array, k).sorted)
+      }
+    }
+  })
+
+  // Using max heap
+  inputs.foreach({
+    case (array, k, output) => {
+      test(s"With Max Heap: Largest $k elements from ${array.mkString(", ")} is = ${output.mkString(", ")}") {
+        assertResult(output.sorted)(PXX_KLargest.findKLargest2(array, k).sorted)
       }
     }
   })

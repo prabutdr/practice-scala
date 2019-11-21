@@ -66,9 +66,13 @@ class MaxHeap {
 
 object MaxHeap {
   def apply(data: Int*): MaxHeap = {
+    apply(data.toArray)
+  }
+
+  def apply(a: Array[Int]): MaxHeap = {
     val heap = new MaxHeap
-    heap.buffer ++= data
-    heap.count = data.length
+    heap.buffer ++= a
+    heap.count = a.length
 
     for (i <- (heap.count - 1) / 2 to 0 by -1)
       heap.perculateDown(i)
