@@ -2,7 +2,7 @@ package com.pj2r.dsame.heap
 
 import scala.collection.mutable.ArrayBuffer
 
-class MaxHeap {
+class MinHeap {
   var count: Int = 0
   val buffer = new ArrayBuffer[Int]
 
@@ -20,7 +20,7 @@ class MaxHeap {
 
   def isEmpty = count == 0
 
-  def getMax: Int = {
+  def getMin: Int = {
     if (count == 0) throw new IllegalStateException("Heap is empty")
     buffer(0)
   }
@@ -28,17 +28,17 @@ class MaxHeap {
   def perculateDown(i: Int): Unit = {
     val l = left(i)
     val r = right(i)
-    var max = if (l != -1 && buffer(l) > buffer(i)) l else i
-    max = if (r != -1 && buffer(r) > buffer(max)) r else max
-    if (i != max) {
+    var min = if (l != -1 && buffer(l) < buffer(i)) l else i
+    min = if (r != -1 && buffer(r) < buffer(min)) r else min
+    if (i != min) {
       val temp = buffer(i)
-      buffer(i) = buffer(max)
-      buffer(max) = temp
-      perculateDown(max)
+      buffer(i) = buffer(min)
+      buffer(min) = temp
+      perculateDown(min)
     }
   }
 
-  def deleteMax(): Int = {
+  def deleteMin(): Int = {
     if (count == 0)
       return -1
     val data = buffer(0)
@@ -53,7 +53,7 @@ class MaxHeap {
     var i = count
     count += 1
     var p = parent(i)
-    while (i >= 0 && p != -1 && data > buffer(p)) {
+    while (i >= 0 && p != -1 && data < buffer(p)) {
       buffer(i) = buffer(p)
       i = p
       p = parent(i)
@@ -61,18 +61,18 @@ class MaxHeap {
     buffer(i) = data
   }
 
-  override def toString: String = "MaxHeap[" + buffer.slice(0, count).toString() + "]";
+  override def toString: String = "MinHeap[" + buffer.slice(0, count).toString() + "]";
 
   def apply(i: Int): Int = buffer(i)
 }
 
-object MaxHeap {
-  def apply(data: Int*): MaxHeap = {
+object MinHeap {
+  def apply(data: Int*): MinHeap = {
     apply(data.toArray)
   }
 
-  def apply(a: Array[Int]): MaxHeap = {
-    val heap = new MaxHeap
+  def apply(a: Array[Int]): MinHeap = {
+    val heap = new MinHeap
     heap.buffer ++= a
     heap.count = a.length
 
@@ -84,14 +84,14 @@ object MaxHeap {
 
   // TEST
   def main(args: Array[String]): Unit = {
-    val heap = MaxHeap(1, 2, 3, 4, 5, 6, 7)
+    val heap = MinHeap(1, 2, 3, 4, 5, 6, 7)
     println(heap)
     heap.insert(10)
     println(heap)
     heap.insert(0)
     println(heap)
-    println(heap.getMax)
-    heap.deleteMax()
+    println(heap.getMin)
+    heap.deleteMin()
     println(heap)
   }
 }
