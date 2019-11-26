@@ -1,7 +1,10 @@
 package com.pj2r.dsame.array
 
+import java.util.Arrays
+
 object PXX_FirstMissingPositive extends App {
-  def find(a: Array[Int]): Int = {
+  def find(data: Array[Int]): Int = {
+    val a = Arrays.copyOf(data, data.length)
     // arrange positive & negative integer partitions
     var pi = -1
     for (i <- 0 until a.length) {
@@ -30,6 +33,27 @@ object PXX_FirstMissingPositive extends App {
     firstMissing + 1
   }
 
+  def find1(a: Array[Int]): Int = {
+    for (i <- 0 until a.length) {
+      var pval = a(i)
+      while (pval > 0 && pval <= a.length && a(pval - 1) != pval) {
+        val nval = a(pval - 1)
+        a(pval - 1) = pval
+        pval = nval
+      }
+      a(i) = pval
+
+      //      println(a.mkString(", "))
+    }
+
+    for (i <- 0 until a.length) {
+      if (a(i) != i + 1)
+        return i + 1
+    }
+    return a.length + 1
+  }
+
   // TEST
-  println(find(Array(1, 2, 0)))
+  println(find(Array(3, 4, -1, 1)))
+  println(find1(Array(3, 4, -1, 1)))
 }
