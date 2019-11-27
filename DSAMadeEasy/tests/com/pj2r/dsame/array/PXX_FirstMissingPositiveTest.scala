@@ -30,4 +30,12 @@ class PXX_FirstMissingPositiveTest extends FunSuite with BeforeAndAfter {
       }
     }
   })
+
+  inputs.foreach({
+    case (array, output) => {
+      test(s"First missing positive integer from using set ${array.mkString(", ")} is = ${output}") {
+        assertResult(output)(PXX_FirstMissingPositive.find1(array))
+      }
+    }
+  })
 }

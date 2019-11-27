@@ -1,6 +1,7 @@
 package com.pj2r.dsame.array
 
 import java.util.Arrays
+import scala.collection.mutable.Set
 
 object PXX_FirstMissingPositive extends App {
   def find(data: Array[Int]): Int = {
@@ -33,7 +34,8 @@ object PXX_FirstMissingPositive extends App {
     firstMissing + 1
   }
 
-  def find1(a: Array[Int]): Int = {
+  def find1(data: Array[Int]): Int = {
+    val a = Arrays.copyOf(data, data.length)
     for (i <- 0 until a.length) {
       var pval = a(i)
       while (pval > 0 && pval <= a.length && a(pval - 1) != pval) {
@@ -51,6 +53,21 @@ object PXX_FirstMissingPositive extends App {
         return i + 1
     }
     return a.length + 1
+  }
+
+  def find2(data: Array[Int]): Int = {
+    val a = Arrays.copyOf(data, data.length)
+    val set = Set[Int]()
+    var firstMissing = 1
+    for (i <- 0 until a.length) {
+      set += data(i)
+      if (firstMissing == data(i))
+        while (set.contains(firstMissing)) {
+          set -= firstMissing
+          firstMissing += 1
+        }
+    }
+    firstMissing
   }
 
   // TEST
