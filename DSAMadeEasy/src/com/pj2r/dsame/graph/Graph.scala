@@ -21,10 +21,11 @@ class Graph(val size: Int) {
     this
   }
 
-  def isEdge(i: Int, j: Int) = {
+  def isEdge(i: Int, j: Int): Boolean = {
     if (isValid(i, j))
       am(i)(j)
-    false
+    else
+      false
   }
 
   override def toString = {
