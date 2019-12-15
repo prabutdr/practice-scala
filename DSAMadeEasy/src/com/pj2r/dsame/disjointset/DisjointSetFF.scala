@@ -23,7 +23,7 @@ class DisjointSetFF(val size: Int) {
     s(x) = y
   }
 
-  override def toString = "DisjointSetFF[" + s.mkString(", ") + "]"
+  override def toString = "DisjointSetFF[" + s.map(find(_)).mkString(", ") + "][" + s.mkString(", ") + "]";
 }
 
 object DisjointSetFF {

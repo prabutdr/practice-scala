@@ -1,5 +1,7 @@
 package com.pj2r.dsame.graph
 
+import scala.collection.mutable.Set
+
 class WeightedGraph(val size: Int) {
   val matrix = Array.ofDim[Integer](size, size)
 
@@ -33,6 +35,16 @@ class WeightedGraph(val size: Int) {
       matrix(i)(j)
     else
       null
+  }
+
+  def edges(): List[(Int, Int, Int)] = {
+    val set = Set[(Int, Int, Int)]()
+    for (i <- 0 until size) {
+      for (j <- 0 until size if isEdge(i, j)) {
+        set += ((weight(i, j), i min j, i max j))
+      }
+    }
+    set.toList.sorted
   }
 
   override def toString = {

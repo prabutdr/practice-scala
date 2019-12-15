@@ -44,6 +44,4 @@ object PXX_PrimsMST extends App {
   println(wg)
   println(distance.mkString(", "))
   println(path.mkString(", "))
-  //0, 3, 1, 5, 7
-  //-1, 2, 0, 2, 1
 }
