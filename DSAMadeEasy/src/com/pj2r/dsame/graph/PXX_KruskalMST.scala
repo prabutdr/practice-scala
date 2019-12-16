@@ -17,7 +17,7 @@ object PXX_KruskalMST extends App {
         //        println(ds.find(i) + ", " + ds.find(j))
         ds.union(ri, rj)
         es += ((w, i, j))
-        //        println(i + ", " + j + ", " + w + ", " + ds)
+        println(i + ", " + j + ", " + w + ", " + ds)
       }
     }
     es
