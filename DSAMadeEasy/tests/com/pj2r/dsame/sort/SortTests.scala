@@ -6,6 +6,7 @@ import org.scalatest.FunSuite
 import org.scalatest.BeforeAndAfter
 import com.pj2r.dsame.sort.BubbleSort
 import com.pj2r.dsame.sort.SelectionSort
+import com.pj2r.dsame.sort.InsertionSort
 
 @RunWith(classOf[JUnitRunner])
 class SortTests extends FunSuite with BeforeAndAfter {
@@ -27,6 +28,14 @@ class SortTests extends FunSuite with BeforeAndAfter {
     case (input, output) => {
       test(s"Selection sort of ${input.mkString("[", ", ", "]")} is = ${output.mkString("[", ", ", "]")}") {
         assertResult(output)(SelectionSort.sort(input))
+      }
+    }
+  })
+
+  inputs.foreach({
+    case (input, output) => {
+      test(s"Insertion sort of ${input.mkString("[", ", ", "]")} is = ${output.mkString("[", ", ", "]")}") {
+        assertResult(output)(InsertionSort.sort(input))
       }
     }
   })
