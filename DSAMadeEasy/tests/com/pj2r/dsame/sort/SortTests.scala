@@ -9,6 +9,7 @@ import com.pj2r.dsame.sort.SelectionSort
 import com.pj2r.dsame.sort.InsertionSort
 import com.pj2r.dsame.sort.ShellSort
 import com.pj2r.dsame.sort.MergeSort
+import com.pj2r.dsame.sort.QuickSort
 
 @RunWith(classOf[JUnitRunner])
 class SortTests extends FunSuite with BeforeAndAfter {
@@ -54,6 +55,14 @@ class SortTests extends FunSuite with BeforeAndAfter {
     case (input, output) => {
       test(s"Merge sort of ${input.mkString("[", ", ", "]")} is = ${output.mkString("[", ", ", "]")}") {
         assertResult(output)(MergeSort.sort(input))
+      }
+    }
+  })
+
+  inputs.foreach({
+    case (input, output) => {
+      test(s"Quick sort of ${input.mkString("[", ", ", "]")} is = ${output.mkString("[", ", ", "]")}") {
+        assertResult(output)(QuickSort.sort(input))
       }
     }
   })
