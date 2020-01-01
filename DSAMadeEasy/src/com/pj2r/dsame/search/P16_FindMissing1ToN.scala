@@ -10,7 +10,15 @@ object P16_FindMissing1ToN extends App {
     nSum - aSum
   }
 
+  def findUsingXOR(a: Array[Int]): Int = {
+    var x = a(0)
+    for (i <- 1 until a.length) x ^= a(i)
+    for (i <- 1 to a.length + 1) x ^= i
+    x
+  }
+
   // Test
   val a = Array(1, 2, 4, 6, 3, 7, 8)
   println(find(a))
+  println(findUsingXOR(a))
 }
